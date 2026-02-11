@@ -2,14 +2,14 @@
 // 깃허브 저장소 정보 입력
 const GITHUB = {
   owner: "yslee11",      // ✅ 본인 깃허브 ID
-  repo: "hy_2",       // ✅ 저장소 이름
+  repo: "hy_llm_1",       // ✅ 저장소 이름
   branch: "main",               // ✅ 브랜치 (보통 main)
   path: "images"                // ✅ 이미지 폴더 이름
 };
 
 // Google Apps Script Web App URL 입력
 // ✅ Apps Script 코드를 수정한 후 새 배포 URL을 여기에 붙여넣으세요.
-const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxAhWr8_LgY4ot3dXAZMxiwMIrb72zCr7U6t63qweuFX9Ma0QdwZoyY1n1zsx50OoEe/exec";
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzqfLee-zKl4CMZhAzPA1pYPXxjYcjSphU1ix2Tbn6AwXkMFKk5hkEwZlkZKJYlFZAJ/exec";
 
 /*****************************************************/
 
@@ -136,9 +136,21 @@ async function initSurvey() {
 //폴더이름생성
 function getGroupFolder(gender, age) {
   const g = gender === "남" ? "male" : "female";
-  const a = age.replace("대", ""); // "20대" → "20"
-  return `${g}_${a}`;
+  let ageGroup = "";
+
+  if (age === "10대" || age === "20대") {
+    ageGroup = "youth";
+  } 
+  else if (age === "30대" || age === "40대" || age === "50대") {
+    ageGroup = "adult";
+  } 
+  else if (age === "60대 이상") {
+    ageGroup = "senior";
+  }
+
+  return `${g}_${ageGroup}`;
 }
+
 
 
 // 이미지 로딩
